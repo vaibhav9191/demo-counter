@@ -1,61 +1,64 @@
 pipeline{
-
-    agent any
-
-        stages{
-
-            stage('git Checkout'){
-
-                steps{
-
+    
+    agent any 
+    
+    stages {
+        
+        stage('Git Checkout'){
+            
+            steps{
+                
+                script{
+                    
                     git branch: 'main', url: 'https://github.com/vaibhav9191/demo-counter.git'
-                }
 
             }
-            stage('Unit TESTING'){
-
-                steps{
-
+        }
+        stage('UNIT testing'){
+            
+            steps{
+                
+                script{
+                    
                     sh 'mvn test'
                 }
-
             }
-            stage('Integration Testing'){
-
-                steps{
+        }
+        stage('Integration testing'){
+            
+            steps{
+                
+                script{
                     
                     sh 'mvn verify -DskipUnitTests'
                 }
             }
-            stage('Maven build'){
-
-                steps{
+        }
+        stage('Maven build'){
+            
+            steps{
+                
+                script{
+                    
                     sh 'mvn clean install'
                 }
             }
-            stage('static analysis'){
-
-                steps{
-                    script{
-
-                          withSonarQubeEnv(credentialsId: 'sonar-api') {
-                          sh 'mvn clean package sonar:sonar' 
-                           }
-                    }
-                }
-            }
-            stage("Quality Gate Status"){
-
-                steps{
-                    //waitForQualityGate abortPipeline: false, credentialsId: 'sonar-api'
-                    waitForQualityGate abortPipeline: true, credentialsId: 'sonar-api'
+        }
+        stage('Static code analysis'){
+            
+            steps{
+                
+                script{
                     
-
+                    withSonarQubeEnv(credentialsId: 'sonar-api') {
+                        
+                        sh 'mvn clean package sonar:sonar'
+                    }
+                   }
+                    
                 }
-                
-                
             }
             
+            }
         }
-    
-}
+        
