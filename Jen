@@ -10,8 +10,8 @@ pipeline{
                 
                 script{
                     
-                    git branch: 'main', url: 'https://github.com/vaibhav9191/demo-counter.git'
-
+                    git branch: 'main', url: 'https://github.com/vikash-kumar01/mrdevops_javaapplication.git'
+                }
             }
         }
         stage('UNIT testing'){
@@ -59,6 +59,6 @@ pipeline{
                 }
             }
             
-            }
         }
         
+}
