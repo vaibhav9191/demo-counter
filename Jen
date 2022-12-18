@@ -61,37 +61,17 @@ pipeline{
             }
             
         }
-        stage('upload War file to nexus'){
-
+        stage('Quality GET Status'){
+            
             steps{
-                 
-                 script{
+                script{
 
-                    def readPomVersion = readMavenPom file: "pom.xml"
+                    waitForQualityGate abortPipeline: false, credentialsId: 'sonarkey'
 
-                    nexusArtifactUploader artifacts:
-                     [
-                        [
-                            artifactId: 'springboot',
-                            classifier: '', 
-                            file: 'target/Uber.jar', 
-                            type: 'jar'
-                            
-                        ]
-                        
-                    ], 
-                    credentialsId: 'nexus_Auth', 
-                    groupId: 'com.example', 
-                    nexusUrl: '44.212.91.82:8081', 
-                    nexusVersion: 'nexus3', 
-                    protocol: 'http', 
-                    repository: 'demoapp-release', 
-                    //version: '1.0.0'
-                    version: "${readPomVersion.version}"
-                 }
+                }
                 
-
             }
+            
         }
         
 
