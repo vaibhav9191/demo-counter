@@ -50,7 +50,7 @@ pipeline{
                 
                 script{
                     
-                    withSonarQubeEnv(credentialsId: 'sonar_api') {
+                    withSonarQubeEnv(credentialsId: 'sonarkey') {
                         
                         sh 'mvn clean package sonar:sonar'
                     }
@@ -66,7 +66,7 @@ pipeline{
             steps{
                 script{
 
-                    waitForQualityGate abortPipeline: false, credentialsId: 'sonar_api'
+                    waitForQualityGate abortPipeline: false, credentialsId: 'sonarkey'
 
                 }
                 
@@ -78,27 +78,27 @@ pipeline{
             steps{
                 script{
 
-                    def readPomVersion = readMavenPom file: 'pom.xml'
-                    def nexusRepo = readPomVersion.version.endsWith("SNAPSHOT") ? "demoapp-snapshot" : "demoapp-release"
+                  //  def readPomVersion = readMavenPom file: 'pom.xml'
+                  //  def nexusRepo = readPomVersion.version.endsWith("SNAPSHOT") ? "demoapp-snapshot" : "demoapp-release"
 
-                    //waitForQualityGate abortPipeline: false, credentialsId: 'Sssonar'
-                    nexusArtifactUploader artifacts:
-                     [
-                        [
-                            artifactId: 'springboot',
-                             classifier: '', 
-                             file: 'target/Uber.jar', 
-                             type: 'jar'
-                        ]
-                    ],
-                     credentialsId: 'nexus_Auth', 
-                     groupId: 'com.example', 
-                     nexusUrl: '44.212.91.82:8081/', 
-                     nexusVersion: 'nexus3', 
-                     protocol: 'http', 
-                     repository: nexusRepo,
-                     //version: '1.0.0' 
-                     version: "${readPomVersion.version}"
+                       //waitForQualityGate abortPipeline: false, credentialsId: 'Sssonar'
+                   // nexusArtifactUploader artifacts:
+                    // [
+                     //   [
+                     //       artifactId: 'springboot',
+                      //       classifier: '', 
+                      //       file: 'target/Uber.jar', 
+                       //      type: 'jar'
+                    //    ]
+                    //],
+                    // credentialsId: 'nexus_Auth', 
+                    // groupId: 'com.example', 
+                    // nexusUrl: '44.212.91.82:8081/', 
+                    // nexusVersion: 'nexus3', 
+                     //protocol: 'http', 
+                     //repository: nexusRepo,
+                        //version: '1.0.0' 
+                     //version: "${readPomVersion.version}"
 
                 }
                 
@@ -111,9 +111,9 @@ pipeline{
 
                 script{
 
-                    sh 'sudo docker image build -t $JOB_NAME:v1.BUILD_ID .'
-                    sh 'sudo docker image tag $JOB_NAME:v1.BUILD_ID vaibhavpatill/$JOB_NAME:v1.BUILD_ID'
-                    sh 'sudo docker image tag $JOB_NAME:latest'
+                    //sh 'sudo docker image build -t $JOB_NAME:v1.BUILD_ID .'
+                    //sh 'sudo docker image tag $JOB_NAME:v1.BUILD_ID vaibhavpatill/$JOB_NAME:v1.BUILD_ID'
+                    //sh 'sudo docker image tag $JOB_NAME:latest'
                 }
             }
 
