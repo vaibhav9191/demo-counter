@@ -97,7 +97,7 @@ pipeline{
                      protocol: 'http', 
                      repository: 'demoapp-release',
                      //version: '1.0.0' 
-                     version: "$(readPomVersion.version)"
+                     version: "${readPomVersion.version}"
 
                 }
                 
