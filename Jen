@@ -50,7 +50,7 @@ pipeline{
                 
                 script{
                     
-                    withSonarQubeEnv(credentialsId: 'sss') {
+                    withSonarQubeEnv(credentialsId: 'nwwsonar') {
                         
                         sh 'mvn clean package sonar:sonar'
                     }
