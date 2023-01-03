@@ -67,7 +67,7 @@ pipeline{
 
                 script{
 
-                    waitForQualityGate abortPipeline: false, credentialsId: 'sss'
+                    waitForQualityGate abortPipeline: false, credentialsId: 'nwwsonar'
 
                 }
                 
