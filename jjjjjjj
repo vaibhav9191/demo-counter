@@ -9,11 +9,11 @@ pipeline{
         string(name: 'region', defaultValue: 'us-west-2', description: 'eks cluster region')
     }
 
-    enviroment{
+    // enviroment{
 
-        ACCESS_KEY = credentials('aws_access_key_id')
-        SECRET_KEY = credentials('aws_secret_access_key')
-    }
+    //     ACCESS_KEY = credentials('aws_access_key_id')
+    //     SECRET_KEY = credentials('aws_secret_access_key')
+    // }
 
     stages{
 
@@ -33,8 +33,8 @@ pipeline{
             steps{
 
                 sh """
-                aws configure set aws_access_key_id "$ACCESS_KEY"  
-                aws configure set aws_secret_access_key "$SECRET_KEY"
+                aws configure set aws_access_key_id "AKIA4B3BWHFOG6TT2HDI"  
+                aws configure set aws_secret_access_key "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"
                 aws configure set region ""              
                 aws eks --region ${params.region} update-kubeconfig --name ${params.cluster}
                 """;
