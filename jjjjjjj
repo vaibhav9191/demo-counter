@@ -63,7 +63,7 @@ pipeline{
 
                         apply = true
 
-                    } catch (error) {
+                    } catch (err){
                         apply = false
                         CurrentBuild.result= 'UNSTABLE'
                     }
