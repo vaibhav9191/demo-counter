@@ -65,7 +65,7 @@ pipeline{
 
                     } catch (error) {
                         apply = false
-                        CurrentBuild.result = 'UNSTABLE'
+                        CurrentBuild.result= 'UNSTABLE'
                     }
                     if(apply){
                         sh """
