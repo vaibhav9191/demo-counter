@@ -2,12 +2,12 @@ pipeline{
 
     agent any
 
-    parameters{
+    // parameters{
 
-        choice(name: 'action', choices: 'create\ndestroy\ndestroyekscluster' , description: 'create update or destroy eks cluster')
-        string(name: 'cluster', defaultValue: 'democ', description: 'eks cluster name')
-        string(name: 'region', defaultValue: 'us-west-2', description: 'eks cluster region')
-    }
+    //     choice(name: 'action', choices: 'create\ndestroy\ndestroyekscluster' , description: 'create update or destroy eks cluster')
+    //     string(name: 'cluster', defaultValue: 'democ', description: 'eks cluster name')
+    //     string(name: 'region', defaultValue: 'us-west-2', description: 'eks cluster region')
+    // }
 
     // enviroment{
 
@@ -28,65 +28,65 @@ pipeline{
            
         }
 
-        stage ('EKS connect'){
+        // stage ('EKS connect'){
 
-            steps{
+        //     steps{
 
-                sh """
-                aws configure set aws_access_key_id "AKIA4B3BWHFOG6TT2HDI"  
-                aws configure set aws_secret_access_key "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"
-                aws configure set region ""              
-                aws eks --region ${params.region} update-kubeconfig --name ${params.cluster}
-                """;
+        //         sh """
+        //         aws configure set aws_access_key_id "AKIA4B3BWHFOG6TT2HDI"  
+        //         aws configure set aws_secret_access_key "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"
+        //         aws configure set region ""              
+        //         aws eks --region ${params.region} update-kubeconfig --name ${params.cluster}
+        //         """;
 
-            }
+        //     }
 
             
-        }
+        // }
 
 
-        stage ('eks Deployment'){
+        // stage ('eks Deployment'){
 
-            when{
-                expression {
-                    params.action == 'create'
-                }
-            }
+        //     when{
+        //         expression {
+        //             params.action == 'create'
+        //         }
+        //     }
 
-            steps{
+        //     steps{
 
-                script{
-                    def apply = false
+        //         script{
+        //             def apply = false
 
-                    try {
-                        input message: 'plz the apply to initiate the deployment', ok 'ready to apply config'
+        //             try {
+        //                 input message: 'plz the apply to initiate the deployment', ok 'ready to apply config'
 
-                        apply = true
+        //                 apply = true
 
-                    } catch (err){
-                        apply = false
-                        //CurrentBuild.result= 'UNSTABLE'
-                    }
-                    if(apply){
-                        sh """
-                            kubectl apply -f .
+        //             } catch (err){
+        //                 apply = false
+        //                 CurrentBuild.result= 'UNSTABLE'
+        //             }
+        //             if(apply){
+        //                 sh """
+        //                     kubectl apply -f .
                         
                         
                         
-                        """;
-                    }
+        //                 """;
+        //             }
 
 
-                }
+        //         }
                 
 
 
                 
 
-            }
+        //     }
 
             
-        }
+        // }
 
     }
 }
