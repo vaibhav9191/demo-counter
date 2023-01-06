@@ -43,24 +43,24 @@ pipeline{
             when{ expression {    params.action == 'create'   }  }
             steps{
                 script{
-
                     def apply = false
-
                     try{
-                         input message: 'plz the apply to initiate the deployment', ok 'ready to apply config'
-                         apply = true
-                        }
-                        catch(err){
-                            apply = false
-                            CurrentBuild.result= 'UNSTABLE'
-                            }
-                            if(apply){
-                            sh """
-                             kubectl apply -f .
-                             """;
-                        }
+                        input message: 'please confirm the appy to initate the depoyment', ok: 'ready to apply config'
+                        apply = true 
+                    }
+                    catch(err){
+                        apply = false
+                        CurrentBuild.result= 'UNSTABLE' 
+                    }
+                    if(apply){
+                        sh """
+                            kubectl apply -f .
+                        
+                        """;
+                    }
 
-                         
+
+                                         
                          
                         
 
