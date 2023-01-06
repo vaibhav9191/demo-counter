@@ -1,0 +1,47 @@
+pipeline{
+    agent any
+
+    parameters{
+
+         choice(name: 'action', choices: 'create\ndestroy\ndestroyekscluster' , description: 'create update or destroy eks cluster')
+         string(name: 'cluster', defaultValue: 'democ', description: 'eks cluster name')
+         string(name: 'region', defaultValue: 'us-west-2', description: 'eks cluster region')
+     }
+     enviroment{
+        ACCESS_KEY = credentials('aws_access_key_id')
+        SECRET_KEY = credentials('aws_secret_access_key')
+
+
+     }
+
+     stages{
+         stage ('git checkout'){
+
+            steps{
+
+                git branch: 'main', url: 'https://github.com/vaibhav9191/demo-counter.git'
+
+            }
+
+           
+        }
+
+        stage('EKS connect'){
+             steps{
+                sh """
+                aws configure set aws_access_key_id "$ACCESS_KEY"  
+                aws configure set aws_secret_access_key "$SECRET_KEY"
+                aws configure set region ""              
+                aws eks --region ${params.region} update-kubeconfig --name ${params.cluster}
+                """;
+
+             }
+
+         }
+
+
+     }
+
+     
+
+}
