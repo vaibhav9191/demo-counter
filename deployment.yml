@@ -7,16 +7,16 @@ spec:
    selector: 
      matchlabels: 
        app: myspringboot
-    teamplate: 
-       metadata:
-         labels:
-           app: myspringboot
-       sepc:
-         containers:
-           - name:myspringboot
-             image: vaibhavpatill/demoapplicattion:latest
-             imagePullPolicy: always
-             ports:
+   teamplate: 
+      metadata:
+        labels:
+          app: myspringboot
+      sepc:
+        containers:
+          - name:myspringboot
+            image: vaibhavpatill/demoapplicattion:latest
+            imagePullPolicy: always
+            ports:
               - continerPort: 9099
            
           
