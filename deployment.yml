@@ -17,7 +17,7 @@ spec:
             image: vaibhavpatill/demoapplicattion:latest
             imagePullPolicy: always
             ports:
-              - continerPort: 9099
+              - containerPort: 9099
            
           
             
