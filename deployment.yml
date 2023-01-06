@@ -11,7 +11,7 @@ spec:
       metadata:
         labels:
           app: myspringboot
-      spcc:
+      spec:
         containers:
           - name: myspringboot
             image: vaibhavpatill/demoapplicattion:latest
