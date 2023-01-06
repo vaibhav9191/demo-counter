@@ -5,9 +5,9 @@ metadata:
 spec: 
    replicas: 2
    selector: 
-     matchlabels: 
+     matchLabels: 
        app: myspringboot
-   teamplate: 
+   template: 
       metadata:
         labels:
           app: myspringboot
@@ -18,3 +18,7 @@ spec:
             imagePullPolicy: always
             ports:
               - continerPort: 9099
+           
+          
+            
+                 
