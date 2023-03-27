@@ -46,5 +46,15 @@ pipeline{
                 }
             }
         }
+        stage('sonarqube analysis'){
+
+            steps{
+
+                withSonarQubeEnv(credentialsId: 'sonartok') {
+                    
+                    sh 'mvn clean package sonar:sonar'
+                }
+            }
+        }
     }
 }
