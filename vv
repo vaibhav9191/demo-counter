@@ -50,9 +50,12 @@ pipeline{
 
             steps{
 
-                withSonarQubeEnv(credentialsId: 'sonartok') {
-                    
-                    sh 'mvn clean package sonar:sonar'
+                script{
+                    withSonarQubeEnv(credentialsId: 'sonartok') {
+                        sh 'mvn clean package sonar:sonar'
+                 
+                    }
+                
                 }
             }
         }
