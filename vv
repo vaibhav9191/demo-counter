@@ -115,4 +115,20 @@ pipeline{
             }
         }
     }
+    stage("Docker Push"){
+        steps{
+            script{
+                withCredentials([string(credentialsId: 'docker_pass', variable: 'docker_hub_credential')]) {
+
+                    sh 'docker login -u vaibhavpatill -p ${docker_hub_credential}'
+                    sh 'docker image push vaibhavpatill/$JOB_NAME:v1.$BUILD_ID'
+                    sh 'docker image push vaibhavpatill/$JOB_NAME:latest'
+    
+                 }
+
+            }
+
+
+        }
+    }
 }
