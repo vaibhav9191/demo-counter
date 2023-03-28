@@ -75,8 +75,10 @@ pipeline{
 
             steps{
                 script{
-
+                   //using pilepine utility script plugin 
                     def readPomVersion = readMavenPom file: 'pom.xml'
+                    //if version ends with SNAPSHOT then choose ? ""(usethis) : ""(othersise use this)
+                    def nexusRepo = readPomVersion.version.endsWith("SNAPSHOT") ? "demo-snapshot" : "demo-release"
 
 
                     nexusArtifactUploader artifacts: 
