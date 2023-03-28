@@ -75,7 +75,7 @@ pipeline{
 
             steps{
                 script{
-                   //using pilepine utility script plugin 
+                   //using pilepine utility script plugin documention 
                     def readPomVersion = readMavenPom file: 'pom.xml'
                     //if version ends with SNAPSHOT then choose ? ""(usethis) : ""(othersise use this)
                     def nexusRepo = readPomVersion.version.endsWith("SNAPSHOT") ? "demo-snapshot" : "demo-release"
@@ -96,6 +96,19 @@ pipeline{
                     repository: "${nexusRepo}", 
                     version: "${readPomVersion.version}"
 
+                }
+
+
+            }
+        }
+        stage("Docker Image BUILD"){
+
+            steps{
+                script{
+
+                   sh 'docker build -t $JOB_NAME:v1.$BUILD_ID'
+                   sh 'docker image tag $JOB_NAME:v1.$BUILD_ID vaibhavpatill/$JOB_NAME:v1.$BUILD_ID'
+                   sh 'docker image tag $JOB_NAME:v1.$BUILD_ID vaibhavpatill/$JOB_NAME:latest
                 }
 
 
