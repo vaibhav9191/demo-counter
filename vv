@@ -115,7 +115,8 @@ pipeline{
             }
         }
         stage("Docker Push"){
-        steps{
+
+          steps{
             script{
                 withCredentials([string(credentialsId: 'docker_pass', variable: 'docker_hub_credential')]) {
 
@@ -129,7 +130,9 @@ pipeline{
 
 
         }
-        stage('docker cleanup'){
+        
+    }
+    stage('docker cleanup'){
             
             steps{
                 script{
@@ -142,7 +145,6 @@ pipeline{
            
 
         }
-    }
     }
     
 }
