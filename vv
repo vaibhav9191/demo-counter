@@ -130,8 +130,16 @@ pipeline{
 
         }
         stage('docker cleanup'){
-            sh 'docker rmi -f vaibhavpatill/$JOB_NAME:v1.$BUILD_ID'
-            sh 'docker rmi -f $JOB_NAME:v1.$BUILD_ID'
+            
+            steps{
+                script{
+
+                     sh 'docker rmi -f vaibhavpatill/$JOB_NAME:v1.$BUILD_ID'
+                    sh 'docker rmi -f $JOB_NAME:v1.$BUILD_ID'
+
+                }
+            }
+           
 
         }
     }
