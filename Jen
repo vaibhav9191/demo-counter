@@ -1,6 +1,10 @@
 pipeline{
     
     agent any 
+    enviroment{
+        def versionFile = 'version.txt'
+        
+    }
     
     stages {
         
@@ -87,8 +91,8 @@ pipeline{
                     sh "mvn -DskipTests=true -Dmaven.javadoc.skip=true -B clean package -DskipTests -Dproject.version=${version}"
                     sh "cp target/Uber.jar target/Uber-${version}.jar"
 
-                    // def readPomVersion = readMavenPom file: 'pom.xml'
-                    // def nexusRepo = readPomVersion.version.endsWith("SNAPSHOT") ? "demoapp-snapshot" : "demoapp-release"
+                    def readPomVersion = readMavenPom file: 'pom.xml'
+                     def nexusRepo = readPomVersion.version.endsWith("SNAPSHOT") ? "demoapp-snapshot" : "demoapp-release"
 
                     nexusArtifactUploader artifacts: 
                     [
