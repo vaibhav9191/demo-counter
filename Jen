@@ -81,6 +81,7 @@ pipeline{
                 script{
                     
                     def versionFile = 'version.txt'
+                    sh "echo Chnaging VERSION......"
                     def version = sh(script: "awk -F '[.]' '{print \$1\".\"\$2\".\"\$3\".\"\$4+1}' ${versionFile}", returnStdout: true).trim()
                     sh "echo ${version} > ${versionFile}"
                     sh "mvn -DskipTests=true -Dmaven.javadoc.skip=true -B clean package -DskipTests -Dproject.version=${version}"
@@ -94,7 +95,7 @@ pipeline{
                         [
                             artifactId: 'springboot', 
                             classifier: '', 
-                            file: 'target/Uber.jar', 
+                            file: 'target/Uber-${version}.jar', 
                             type: 'jar'
                         ]
                     ], 
